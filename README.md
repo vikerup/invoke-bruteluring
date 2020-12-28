@@ -2,7 +2,7 @@
 
 ## Getting started
 
-invoke-bruteluring is a password spraying tool used to guess password on red team or Active Dirctory security assessments.
+invoke-bruteluring is a password spraying tool used to guess password on red team or Active Directory security assessments.
 
 ### Usage
 
