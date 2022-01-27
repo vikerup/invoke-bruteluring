@@ -52,6 +52,7 @@ $domaininfo = new-object DirectoryServices.DirectoryEntry("LDAP://$pdc/$ldap_for
 $searcher = New-Object System.DirectoryServices.DirectorySearcher([ADSI]$domaininfo)
 $searcher.Filter='(&(objectCategory=Person)(objectClass=User))'
 $searcher.CacheResults=$False
+$searcher.pageSize=1000;
 
 $users = $searcher.Findall().getdirectoryentry() | ForEach-Object{
     New-Object -TypeName PSCustomObject -Property @{
@@ -118,7 +119,7 @@ foreach ($user in $users){
     if ($result | Where {$_.IsValid -eq $False}){ 
         if ($oldpwdcount -eq $updpwdcount){
             if($oldpwdcount -ne $maxbad){
-                write-host "[+]" $user.samaccountname": password history includes $password"
+                #write-host "[+]" $user.samaccountname": password history includes $password"
             }
         }
     }
